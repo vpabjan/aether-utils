@@ -10,7 +10,7 @@ import webbrowser
 import os
 
 
-GITHUB_URL = "https://github.com/<your-repo-here>"   # ← replace with your GitHub
+GITHUB_URL = "https://github.com/vpabjan/aether-linux"
 
 
 class WelcomeWindow(QWidget):
@@ -27,7 +27,7 @@ class WelcomeWindow(QWidget):
             Qt.WindowType.WindowCloseButtonHint
         )
 
-        self.setFixedSize(350, 250)
+        self.setFixedSize(350, 320)
         self.init_ui()
 
     def init_ui(self):
@@ -54,15 +54,20 @@ class WelcomeWindow(QWidget):
         btn_open.clicked.connect(self.open_center)
         btn_open.setFixedHeight(40)
 
+        btn_scripts = QPushButton("Open Scripts")
+        btn_scripts.clicked.connect(self.open_scripts)
+        btn_scripts.setFixedHeight(40)
+
         btn_info = QPushButton("Info (GitHub)")
         btn_info.clicked.connect(self.open_info)
         btn_info.setFixedHeight(40)
+
 
         btn_close = QPushButton("Close")
         btn_close.clicked.connect(self.close)
         btn_close.setFixedHeight(40)
 
-        for b in (btn_open, btn_info, btn_close):
+        for b in (btn_open, btn_info, btn_close, btn_scripts):
             b.setStyleSheet("""
                 QPushButton {
                     background-color: #ffffff;
@@ -81,6 +86,7 @@ class WelcomeWindow(QWidget):
         layout.addStretch()
         layout.addWidget(btn_open)
         layout.addWidget(btn_info)
+        layout.addWidget(btn_scripts)
         layout.addWidget(btn_close)
 
         self.setLayout(layout)
@@ -88,6 +94,11 @@ class WelcomeWindow(QWidget):
     def open_center(self):
         """Run the second script (center.py)"""
         script_path = os.path.join(os.path.dirname(__file__), "centre.py")
+        subprocess.Popen(["python3", script_path])
+
+    def open_scripts(self):
+        """Run the second script (center.py)"""
+        script_path = os.path.join(os.path.dirname(__file__), "scripts.py")
         subprocess.Popen(["python3", script_path])
 
     def open_info(self):
