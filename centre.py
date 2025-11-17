@@ -9,6 +9,9 @@ from PyQt6.QtCore import Qt
 class UserSettingsWindow(QWidget):
     def __init__(self):
         super().__init__()
+        self.setWindowFlags(Qt.WindowType.Window |
+Qt.WindowType.FramelessWindowHint |
+Qt.WindowType.WindowStaysOnTopHint)
         self.setWindowTitle("User Settings")
         self.setGeometry(200, 200, 400, 300)
         layout = QVBoxLayout()
@@ -19,8 +22,16 @@ class AetherCentre(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("AetherCentre")
-        self.setGeometry(100, 100, 500, 400)
+        self.setGeometry(100, 100, 300, 400)
+        self.setFixedSize(300, 400)
         self.initUI()
+
+    def launch_app_scripts(self):
+        try:
+            subprocess.Popen(["python3", f"{sys.path[0]}/scripts.py"])
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Could not launch Scripts browser: {e}")
+
 
     def initUI(self):
         main_layout = QVBoxLayout()
@@ -45,6 +56,7 @@ class AetherCentre(QWidget):
             ("Firefox", lambda: self.launch_app("firefox")),
             ("Task Manager", lambda: self.launch_app("btop")),
             ("File Manager", lambda: self.launch_app("nemo")),
+            ("Scripts", lambda: self.launch_app_scripts())
         ]
 
         for name, func in apps:

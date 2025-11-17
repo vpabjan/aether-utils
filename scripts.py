@@ -28,6 +28,20 @@ scripts = [
         "origin": "aether-utils",
         "version": "0.1",
         "description": "Installs yay from its official git repo."
+    },
+    {
+        "name": "Install iwmenu",
+        "path": "scripts/install_iwmenu.sh",
+        "origin": "aether-utils",
+        "version": "0.1",
+        "description": "Installs iwmenu from its official git repo."
+    },
+    {
+        "name": "Change hostname",
+        "path": "scripts/change_hostname.sh",
+        "origin": "aether-utils",
+        "version": "0.1",
+        "description": "Change this computer's hostname."
     }
 ]
 
@@ -38,7 +52,7 @@ class ScriptBrowser(QWidget):
     Qt.WindowType.Window |
     Qt.WindowType.FramelessWindowHint |
     Qt.WindowType.WindowStaysOnTopHint)
-        self.setWindowTitle("Aether Script Browser")
+        self.setWindowTitle("Aether Scripts")
         self.setGeometry(200, 200, 800, 600)
         self.setFixedSize(800, 600)
 
